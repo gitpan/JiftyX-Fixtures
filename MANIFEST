@@ -4,10 +4,9 @@ MANIFEST
 META.yml
 Makefile.PL
 README
-README.markdown
 bin/jiftyx-fixtures
-dist.ini
 lib/JiftyX/Fixtures.pm
+lib/JiftyX/Fixtures/Script.pm
 t/00-compile.t
 t/01-load-app.t
 t/etc/config.yml

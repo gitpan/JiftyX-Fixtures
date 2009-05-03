@@ -1,12 +1,11 @@
 package JiftyTest;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 use File::Basename;
 use Cwd 'abs_path';
 
-$ENV{'JIFTY_APP_ROOT'} = dirname( abs_path(__FILE__) ) . "/JiftyTest";
-$ENV{'JIFTY_APP_ROOT'} = "/Users/shelling/develope/perl/JiftyX-Fixtures/t/lib/JiftyTest";
+$ENV{'JIFTY_APP_ROOT'} = abs_path( dirname( abs_path(__FILE__) ) . "/../" );
 
 sub start {
   Jifty->web->add_javascript("main.js");

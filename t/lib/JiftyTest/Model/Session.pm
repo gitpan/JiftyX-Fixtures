@@ -1,5 +1,5 @@
 package JiftyTest::Model::Session;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 
 use base Jifty::Model::Session;

@@ -1,5 +1,5 @@
 package JiftyX::Fixtures;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # ABSTRACT: Insert fixtures into your Jifty application database
 
@@ -30,10 +30,10 @@ sub new {
   }
 
   if ($self->{config}->{execution}->{"drop-database"} eq "true") {
-    print "WARN - Database has existed, Drop it now.\n";
     my $dbconfig = $self->{config}->{framework}->{Database};
 
     if ($dbconfig->{Driver} eq "SQLite" && -e $dbconfig->{Database} ) {
+      print "WARN - SQLite Database has existed, delete file now.\n";
       unlink $dbconfig->{Database};
     }
 
@@ -86,6 +86,7 @@ sub run {
 
 1;
 
+
 __END__
 =head1 NAME
 
@@ -93,7 +94,11 @@ JiftyX::Fixtures - Insert fixtures into your Jifty application database
 
 =head1 VERSION
 
-version 0.01
+version 0.02
+
+=head1 SYNOPSIS
+
+=head1 DESCRIPTION
 
 =head1 AUTHOR
 
@@ -106,4 +111,36 @@ This software is Copyright (c) 2009 by <shelling@cpan.org>.
 This is free software, licensed under:
 
   The MIT (X11) License
+
+=head1 METHODS
+
+=head2 new
+
+=head2 app_root
+
+Invoke without args to get your application root.
+
+Give one arg to set it.
+
+=head2 config
+
+Give one arg which is selected from "framework", "fixtures", "execution" to get the configuration detail.
+
+Append second arg to set the configuration.
+
+    $jf->config("fixtures"); #=> { development => { dir => "etc/fixtures/development" }, test => { dir => "etc/fixtures/test" } }
+    $jf->config(
+      fixtures => {
+        development => {
+          dir => "etc/dev_fixtures"
+        },
+        test => {
+          dir => "etc/test_fixtures"
+        }
+      }
+    );
+
+=head2 fixtures_files
+
+=head2 run
 
