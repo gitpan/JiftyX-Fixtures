@@ -1,5 +1,7 @@
 package JiftyX::Fixtures::Script::Scaffold;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
+
+# ABSTRACT: scaffold subcommands
 
 use warnings;
 use strict;
@@ -26,11 +28,11 @@ sub run {
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script::Scaffold
+JiftyX::Fixtures::Script::Scaffold - scaffold subcommands
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 AUTHOR
 

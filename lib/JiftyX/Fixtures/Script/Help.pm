@@ -1,13 +1,15 @@
-package JiftyX::Fixtures::Script;
+package JiftyX::Fixtures::Script::Help;
 our $VERSION = '0.04';
 
-# ABSTRACT: Main script package handling dispatch for subcommands
+# ABSTRACT: help subcommands
 
-use strict;
 use warnings;
+use strict;
 
-use App::CLI;
-use base qw(App::CLI App::CLI::Command);
+use base qw(
+  App::CLI::Command::Help
+);
+
 
 
 1;
@@ -15,7 +17,7 @@ use base qw(App::CLI App::CLI::Command);
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script - Main script package handling dispatch for subcommands
+JiftyX::Fixtures::Script::Help - help subcommands
 
 =head1 VERSION
 

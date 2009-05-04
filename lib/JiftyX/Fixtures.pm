@@ -1,5 +1,5 @@
 package JiftyX::Fixtures;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 # ABSTRACT: Insert fixtures into your Jifty application database
 
@@ -17,9 +17,11 @@ use JiftyX::Fixtures::Script;
 sub new {
   my $self = bless {}, shift;
 
-  $self->{config}->{app_root} = Jifty::Util->app_root;
+  $self->{config}->{app_root}   = Jifty::Util->app_root;
   $self->{config}->{framework}  = Jifty->config->stash->{framework};
-  $self->{config}->{fixtures}   = LoadFile( $self->{config}->{app_root} . "/etc/fixtures.yml");
+
+  my $fixtures_config = $self->{config}->{app_root} . "/etc/fixtures.yml";
+  $self->{config}->{fixtures}   = LoadFile($fixtures_config) if (-e $fixtures_config);
 
   $self;
 }
@@ -50,11 +52,23 @@ JiftyX::Fixtures - Insert fixtures into your Jifty application database
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
+    JiftyX::Fixtures->new->config(
+      fixtures => [
+        development => {
+          dir => "etc/fixtures/development"
+        }
+      ]
+    )->run;
+
 =head1 DESCRIPTION
+
+WARNING: This software is stil in alpha stage, any intense variation is possible.
+
+Load pre-defined fixture from specified mode, and Insert it into you Jifty application database.
 
 =head1 AUTHOR
 
@@ -76,7 +90,7 @@ Constructor, invoke without args
 
 =head2 config
 
-Give one arg which is selected from "app_root", "framework", "fixtures", "execution" to get the configuration detail.
+Give one arg which is selected from "app_root", "framework", "fixtures" to get the configuration detail.
 
 Append second arg to set the configuration.
 
@@ -95,5 +109,5 @@ Append second arg to set the configuration.
 
 =head2 run
 
-Running script
+Running
 

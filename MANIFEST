@@ -8,6 +8,7 @@ bin/jiftyx-fixtures
 lib/JiftyX/Fixtures.pm
 lib/JiftyX/Fixtures/Script.pm
 lib/JiftyX/Fixtures/Script/Base.pm
+lib/JiftyX/Fixtures/Script/Help.pm
 lib/JiftyX/Fixtures/Script/Load.pm
 lib/JiftyX/Fixtures/Script/Scaffold.pm
 t/00-compile.t

@@ -1,5 +1,7 @@
 package JiftyX::Fixtures::Script::Base;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
+
+# ABSTRACT: Base package of all subcommands, should not run it
 
 use warnings;
 use strict;
@@ -26,11 +28,11 @@ sub run {
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script::Base
+JiftyX::Fixtures::Script::Base - Base package of all subcommands, should not run it
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 AUTHOR
 

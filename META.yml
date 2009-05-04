@@ -10,4 +10,4 @@ requires:
   Jifty: '0'
   Text::Greeking: '0'
   YAML: '0'
-version: '0.03'
+version: '0.04'

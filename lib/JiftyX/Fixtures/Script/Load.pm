@@ -1,5 +1,7 @@
 package JiftyX::Fixtures::Script::Load;
-our $VERSION = '0.03';
+our $VERSION = '0.04';
+
+# ABSTRACT: load subcommands, primary function of JiftyX::Fixtures
 
 use warnings;
 use strict;
@@ -61,8 +63,14 @@ sub run {
 
   if ($self->{help}) {
     print qq{
-jiftyx-fixtures load [options]
-OPTIONS:
+jiftyx-fixtures v$JiftyX::Fixtures::VERSION
+
+Usage:
+
+  jiftyx-fixtures load [options]
+
+Options:
+
   --drop-database:    [-d] drop database before loading fixtures, default is true
   --environment:      [-e] specify environment, default is development
   --help:             [-h] show help
@@ -100,11 +108,11 @@ OPTIONS:
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script::Load
+JiftyX::Fixtures::Script::Load - load subcommands, primary function of JiftyX::Fixtures
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 AUTHOR
 
