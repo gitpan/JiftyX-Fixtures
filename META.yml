@@ -6,8 +6,8 @@ generated_by: Dist::Zilla::Plugin::MetaYaml version 1.007
 license: mit
 name: JiftyX-Fixtures
 requires:
-  Getopt::Compact: '0'
+  App::CLI: '0'
   Jifty: '0'
   Text::Greeking: '0'
   YAML: '0'
-version: '0.02'
+version: '0.03'

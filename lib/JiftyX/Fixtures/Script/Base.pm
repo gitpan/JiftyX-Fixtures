@@ -1,11 +1,24 @@
-package JiftyX::Fixtures::Script;
+package JiftyX::Fixtures::Script::Base;
 our $VERSION = '0.03';
 
-use strict;
 use warnings;
+use strict;
 
-use App::CLI;
-use base qw(App::CLI App::CLI::Command);
+use base qw(
+  App::CLI::Command
+);
+
+sub options {
+  return (
+    'h|help|?'  => 'help',
+    'man'     => 'man',
+  );
+}
+
+sub run {
+  my ($self) = @_;
+  print "run() does not defined in " . ref($self) . "\n";
+}
 
 
 1;
@@ -13,7 +26,7 @@ use base qw(App::CLI App::CLI::Command);
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script
+JiftyX::Fixtures::Script::Base
 
 =head1 VERSION
 

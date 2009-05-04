@@ -8,7 +8,7 @@ JiftyTest::Action::DoNothing
 =cut
 
 package JiftyTest::Action::DoNothing;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use base qw/JiftyTest::Action Jifty::Action/;
 

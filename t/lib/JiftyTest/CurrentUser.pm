@@ -1,5 +1,5 @@
 package JiftyTest::CurrentUser;
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use warnings;
 use strict;

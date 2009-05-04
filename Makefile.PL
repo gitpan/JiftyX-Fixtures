@@ -9,13 +9,13 @@ WriteMakefile(
   NAME      => 'JiftyX::Fixtures',
   AUTHOR    => 'shelling\ \<shelling\@cpan\.org\>',
   ABSTRACT  => 'Insert fixtures into your Jifty application database',
-  VERSION   => '0.02',
+  VERSION   => '0.03',
   EXE_FILES => [ qw(bin/jiftyx-fixtures) ],
   (eval { ExtUtils::MakeMaker->VERSION(6.21) } ? (LICENSE => 'mit') : ()),
   PREREQ_PM    => {
     "Text::Greeking" => '0',
     "YAML" => '0',
     "Jifty" => '0',
-    "Getopt::Compact" => '0',
+    "App::CLI" => '0',
   },
 );
