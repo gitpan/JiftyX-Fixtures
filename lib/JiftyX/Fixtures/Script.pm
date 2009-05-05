@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: Main script package handling dispatch for subcommands
 
@@ -19,7 +19,7 @@ JiftyX::Fixtures::Script - Main script package handling dispatch for subcommands
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 AUTHOR
 

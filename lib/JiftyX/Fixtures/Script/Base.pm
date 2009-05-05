@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script::Base;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: Base package of all subcommands, should not run it
 
@@ -32,7 +32,7 @@ JiftyX::Fixtures::Script::Base - Base package of all subcommands, should not run
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 AUTHOR
 

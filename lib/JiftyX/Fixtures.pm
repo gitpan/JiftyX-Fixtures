@@ -1,5 +1,5 @@
 package JiftyX::Fixtures;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: Insert fixtures into your Jifty application database
 
@@ -37,7 +37,9 @@ sub config {
 }
 
 sub run { 
-  my $self = shift;
+  my ($self, $subcommand) = @_;
+  $subcommand ||= "load";
+  unshift @ARGV, $subcommand unless defined($ARGV[0]);
   JiftyX::Fixtures::Script->dispatch( config => $self->{config} );
 }
   
@@ -52,7 +54,7 @@ JiftyX::Fixtures - Insert fixtures into your Jifty application database
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -66,7 +68,7 @@ version 0.04
 
 =head1 DESCRIPTION
 
-WARNING: This software is stil in alpha stage, any intense variation is possible.
+    WARNING: This software is stil in alpha stage, any intense variation is possible.
 
 Load pre-defined fixture from specified mode, and Insert it into you Jifty application database.
 
@@ -109,5 +111,5 @@ Append second arg to set the configuration.
 
 =head2 run
 
-Running
+Running subcommand, default is "load". Give one arg to specify which subcommand would be run.
 

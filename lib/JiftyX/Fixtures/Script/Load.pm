@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script::Load;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: load subcommands, primary function of JiftyX::Fixtures
 
@@ -112,7 +112,7 @@ JiftyX::Fixtures::Script::Load - load subcommands, primary function of JiftyX::F
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 AUTHOR
 

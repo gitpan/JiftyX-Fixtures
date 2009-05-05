@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script::Help;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 # ABSTRACT: help subcommands
 
@@ -21,7 +21,7 @@ JiftyX::Fixtures::Script::Help - help subcommands
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 AUTHOR
 

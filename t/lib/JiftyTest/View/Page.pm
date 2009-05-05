@@ -1,5 +1,5 @@
 package JiftyTest::View::Page;
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 use base Jifty::View::Declare::Page;
