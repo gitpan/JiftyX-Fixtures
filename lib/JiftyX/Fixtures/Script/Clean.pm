@@ -1,7 +1,7 @@
-package JiftyX::Fixtures::Script::Init;
+package JiftyX::Fixtures::Script::Clean;
 our $VERSION = '0.07';
 
-# ABSTRACT: init subcommand
+# ABSTRACT: clean subcommand
 
 use warnings;
 use strict;
@@ -12,6 +12,7 @@ use Jifty::Everything;
 use IO::File;
 use File::Basename;
 use File::Spec;
+use File::Path;
 use YAML qw(Dump LoadFile);
 
 use base qw(
@@ -23,24 +24,11 @@ my $super = 'JiftyX::Fixtures::Script';
 our $help_msg = qq{
 Usage:
 
-  jiftyx-fixtures init [options]
+  jiftyx-fixtures clean [options]
 
 Options:
 
   -h, --help:               show help
-
-};
-
-my $prototype = qq{
-development:
-  dir: "etc/fixtures/development"
-  format: "yml"
-  greeking: "false"
-
-test:
-  dir: "etc/fixtures/test"
-  format: "yml"
-  greeking: "false"
 
 };
 
@@ -62,16 +50,26 @@ sub before_run {
 sub run {
   my ($self) = @_;
   $self->before_run();
-  
-  unless ($self->{config}->{fixtures}) {
 
-    my $fixtures_config = IO::File->new;
-    if ($fixtures_config->open("> " . $self->{config}->{app_root} . "/etc/fixtures.yml")) {
-      print $fixtures_config $prototype;
-    }
-
-    mkdir $self->{config}->{app_root} . "/etc/fixtures";
+  for (keys %{$self->{config}->{fixtures}}) {
+    my $dir = File::Spec->catfile(
+      $self->{config}->{app_root},
+      $self->{config}->{fixtures}->{$_}->{dir}
+    );
+    rmtree $dir;
   }
+  rmdir File::Spec->catfile(
+    $self->{config}->{app_root},
+    "etc",
+    "fixtures"
+  );
+  unlink File::Spec->catfile(
+    $self->{config}->{app_root},
+    "etc",
+    "fixtures.yml"
+  );
+
+
 }
 
 1;
@@ -79,7 +77,7 @@ sub run {
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script::Init - init subcommand
+JiftyX::Fixtures::Script::Clean - clean subcommand
 
 =head1 VERSION
 

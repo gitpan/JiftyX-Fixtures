@@ -7,12 +7,14 @@ README
 bin/jiftyx-fixtures
 lib/JiftyX/Fixtures.pm
 lib/JiftyX/Fixtures/Script.pm
+lib/JiftyX/Fixtures/Script/Clean.pm
 lib/JiftyX/Fixtures/Script/Help.pm
 lib/JiftyX/Fixtures/Script/Init.pm
 lib/JiftyX/Fixtures/Script/Load.pm
 lib/JiftyX/Fixtures/Script/Scaffold.pm
 t/00-compile.t
 t/01-load-app.t
+t/04-script-scaffold.t
 t/etc/config.yml
 t/etc/fixtures.yml
 t/lib/JiftyTest.pm

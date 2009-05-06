@@ -1,5 +1,5 @@
 package JiftyX::Fixtures;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 # ABSTRACT: Insert fixtures into your Jifty application database
 
@@ -56,7 +56,7 @@ JiftyX::Fixtures - Insert fixtures into your Jifty application database
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 

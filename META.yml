@@ -2,7 +2,7 @@
 abstract: Insert fixtures into your Jifty application database
 author:
 - shelling <shelling@cpan.org>
-generated_by: Dist::Zilla::Plugin::MetaYaml version 1.007
+generated_by: Dist::Zilla::Plugin::MetaYaml version 1.091250
 license: mit
 name: JiftyX-Fixtures
 requires:
@@ -11,4 +11,4 @@ requires:
   Text::Greeking: '0'
   UNIVERSAL::dump: '0'
   YAML: '0'
-version: '0.06'
+version: '0.07'

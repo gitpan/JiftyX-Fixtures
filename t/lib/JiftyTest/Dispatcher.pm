@@ -1,5 +1,5 @@
 package JiftyTest::Dispatcher;
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 use Jifty::Dispatcher -base;
 
