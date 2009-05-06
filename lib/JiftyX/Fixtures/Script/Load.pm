@@ -1,7 +1,7 @@
 package JiftyX::Fixtures::Script::Load;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
-# ABSTRACT: load subcommands, primary function of JiftyX::Fixtures
+# ABSTRACT: load subcommand, primary function of this module
 
 use warnings;
 use strict;
@@ -14,22 +14,68 @@ use File::Spec;
 use YAML qw(Dump LoadFile);
 
 use base qw(
-  JiftyX::Fixtures::Script::Base
   App::CLI::Command
 );
+
+my $super = 'JiftyX::Fixtures::Script';
+
+our $help_msg = qq{
+Usage:
+
+  jiftyx-fixtures load [options]
+
+Options:
+
+  -d, --drop-database:      drop database before loading fixtures, default is true
+  -e, --environment:        specify environment, default is development
+  -h, --help:               show help
+
+};
 
 sub options {
   my ($self) = @_;
   return (
-    $self->SUPER::options,
+    $super->options,
     'd|drop-database=s' => 'drop-database',
     'e|environment=s'   => 'environment',
   );
 }
 
+sub before_run {
+  my ($self) = @_;
+
+  $super->before_run($self);
+
+  $self->{environment} ||= "development";
+  $self->{'drop-database'} ||= "true";
+  $self->drop_db() if ($self->{"drop-database"} eq "true");
+
+  return;
+}
+
+sub run {
+  my ($self) = @_;
+  $self->before_run();
+
+  Jifty->new;
+
+  for ($self->fixtures_files) {
+    my $filename = basename($_);
+    $filename =~ s/\.yml//;
+
+    my $fixtures = LoadFile($_);
+
+    my $model = Jifty->app_class("Model",$filename)->new;
+
+    for my $entity (@{ $fixtures }) {
+      $model->create( %{$entity} );
+    }
+  }
+}
+
 sub fixtures_files {
   my $self = shift;
-  glob(
+  return glob(
     File::Spec->catfile(
       $self->{config}->{app_root},
       "etc",
@@ -58,61 +104,17 @@ sub drop_db {
   }
 }
 
-sub run {
-  my ($self) = @_;
-
-  if ($self->{help}) {
-    print qq{
-jiftyx-fixtures v$JiftyX::Fixtures::VERSION
-
-Usage:
-
-  jiftyx-fixtures load [options]
-
-Options:
-
-  --drop-database:    [-d] drop database before loading fixtures, default is true
-  --environment:      [-e] specify environment, default is development
-  --help:             [-h] show help
-    \n};
-    return;
-  }
-
-  $self->{environment} ||= "development";
-  $self->{'drop-database'} ||= "true";
-
-  $self->drop_db if ($self->{"drop-database"} eq "true");
-
-  eval qq{
-    package main;
-    Jifty->new;
-  };
-
-  for ($self->fixtures_files) {
-    my $filename = basename($_);
-    $filename =~ s/\.yml//;
-
-    my $fixtures = LoadFile($_);
-
-    my $model = Jifty->app_class("Model",$filename)->new;
-
-    for my $entity (@{ $fixtures }) {
-      $model->create( %{$entity} );
-    }
-  }
-}
-
 
 1;
 
 __END__
 =head1 NAME
 
-JiftyX::Fixtures::Script::Load - load subcommands, primary function of JiftyX::Fixtures
+JiftyX::Fixtures::Script::Load - load subcommand, primary function of this module
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 AUTHOR
 

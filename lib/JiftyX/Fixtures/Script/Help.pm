@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script::Help;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 # ABSTRACT: help subcommands
 
@@ -9,6 +9,17 @@ use strict;
 use base qw(
   App::CLI::Command::Help
 );
+
+sub run {
+  my $self = shift;
+
+  if ($self->{config}->{fixtures}) {
+    $self->SUPER(@_);
+  } else {
+    print $self->{config}->{app_root} . " is not existed. Please run `jiftyx-fixtures init`\n";
+  }
+
+}
 
 
 
@@ -21,7 +32,7 @@ JiftyX::Fixtures::Script::Help - help subcommands
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 AUTHOR
 

@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 # ABSTRACT: Main script package handling dispatch for subcommands
 
@@ -8,6 +8,28 @@ use warnings;
 
 use App::CLI;
 use base qw(App::CLI App::CLI::Command);
+
+sub options {
+  return (
+    'h|help|?'  => 'help',
+    'man'     => 'man',
+  );
+}
+
+sub before_run {
+  my ($here, $self) = @_;
+
+  if ($self->{help}) {
+    print "jiftyx-fixtures v$JiftyX::Fixtures::VERSION\n";
+    eval 'print $' . ref($self) . '::help_msg';
+    exit;
+  }
+
+}
+
+sub run {
+  my ($here, $self) = @_;
+}
 
 
 1;
@@ -19,7 +41,7 @@ JiftyX::Fixtures::Script - Main script package handling dispatch for subcommands
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 AUTHOR
 

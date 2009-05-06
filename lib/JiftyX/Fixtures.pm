@@ -1,10 +1,12 @@
 package JiftyX::Fixtures;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 # ABSTRACT: Insert fixtures into your Jifty application database
 
 use strict;
 use warnings;
+
+use UNIVERSAL::dump;
 
 use Jifty;
 use Jifty::Everything;
@@ -54,7 +56,7 @@ JiftyX::Fixtures - Insert fixtures into your Jifty application database
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 

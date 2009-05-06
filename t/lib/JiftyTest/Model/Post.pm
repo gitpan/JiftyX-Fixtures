@@ -2,7 +2,7 @@ use strict;
 use warnings;
 
 package JiftyTest::Model::Post;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 use Jifty::DBI::Schema;
 

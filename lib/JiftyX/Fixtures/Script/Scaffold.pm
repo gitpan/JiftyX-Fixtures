@@ -1,5 +1,5 @@
 package JiftyX::Fixtures::Script::Scaffold;
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 # ABSTRACT: scaffold subcommands
 
@@ -15,24 +15,68 @@ use File::Basename;
 use YAML qw(Dump LoadFile);
 
 use base qw(
-  JiftyX::Fixtures::Script::Base
   App::CLI::Command
 );
+
+my $super = 'JiftyX::Fixtures::Script';
+
+our $help_msg = qq{
+Usage:
+
+  jiftyx-fixtures scaffold [options]
+
+Options:
+
+  -e, --environment:        specify environment, default is development
+  -h, --help:               show help
+  --man                     man page
+
+};
 
 sub options {
   my ($self) = @_;
   (
-    $self->SUPER::options,
+    $super->options,
     'e|environment=s' => "environment",
   );
 }
 
+sub before_run {
+  my ($self) = @_;
+
+  $super->before_run($self);
+
+  $self->{environment} ||= "development";
+
+  return;
+}
+
 sub run {
   my ($self, $args) = @_;
-  print "INFO - run " . ref($self) ."\n";
+  $self->before_run();
+
   Jifty->new;
 
-  my @models = map { basename($_) } glob(
+  for my $model ($self->model_list) {
+    # my %columns =  map { $_->name() => undef } Jifty->app_class("Model",$model)->columns;
+
+    my $filename = $self->fixtures_filename($model, "yml");
+    my $file = IO::File->new ;
+    if (defined $file->open("> $filename") ) {
+      print $file "-\n";
+      for my $c (Jifty->app_class("Model",$model)->columns) {
+        print $file "  " . $c->name . ":\n" if $c->{writable};
+      }
+      $file->close;
+    }
+
+  }
+
+}
+
+sub model_list {
+  my ($self) = @_;
+  my @result =  map { basename($_) } glob(
     File::Spec->catfile(
       $self->{config}->{app_root},
       "lib",
@@ -41,31 +85,21 @@ sub run {
       "*"
     )
   );
+  for (@result) {
+    $_ =~ s/\.pm//g;
+  }
+  @result;
+}
 
-  for my $model (@models) {
-    $model =~ s/\.pm//g;
-    my %columns =  map { $_->name() => undef } Jifty->app_class("Model",$model)->columns;
-
-    my $filename = File::Spec->catfile(
+sub fixtures_filename {
+  my ($self, $model, $format) = @_;
+  return File::Spec->catfile(
       $self->{config}->{app_root},
       $self->{config}->{fixtures}->{$self->{environment}}->{dir},
-      "$model.yml"
-    );
-
-    print $filename,"\n";
-
-    my $file = IO::File->new ;
-    if (defined $file->open("> $filename") ) {
-      print $file "-\n";
-      for my $c (map {$_->name()} Jifty->app_class("Model",$model)->columns) {
-        print $file "  $c:\n";
-      }
-      $file->close;
-    }
-
-  }
-
+      "$model.$format"
+  );
 }
+
 
 1;
 
@@ -76,7 +110,7 @@ JiftyX::Fixtures::Script::Scaffold - scaffold subcommands
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 AUTHOR
 

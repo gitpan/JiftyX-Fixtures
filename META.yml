@@ -9,5 +9,6 @@ requires:
   App::CLI: '0'
   Jifty: '0'
   Text::Greeking: '0'
+  UNIVERSAL::dump: '0'
   YAML: '0'
-version: '0.05'
+version: '0.06'
